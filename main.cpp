@@ -4,9 +4,9 @@
 
 int main() {
     double x;
-    int k; // unsigned int can't be used as negative power in pow
     std::cout << "Enter x ";
     std::cin >> x;
+    int k; // unsigned int can't be used as negative power in pow
     std::cout << "Enter k ";
     std::cin >> k;
     double accuracy = pow(10, -k);
