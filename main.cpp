@@ -22,9 +22,9 @@ int main() {
         if (taylor_member > 0 && taylor_member < accuracy) break;
         result += taylor_member;
     }
-   
+
     std::cout << std::fixed;
-    std::cout << std::setprecision(16);
+    std::cout << std::setprecision(k);
     std::cout << "The result is " << result << std::endl;
     std::cout << "Result form std is " << sinh(x) << std::endl;
    
