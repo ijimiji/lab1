@@ -18,13 +18,9 @@ int main() {
         i += 2;
     }
 
-    double e = std::exp(1.0);
-    double ch_1 = (pow(e, x) + pow(e, -x))/2;
-
     std::cout << std::fixed;
     std::cout << std::setprecision(k);
     std::cout << "The result is " << ch << std::endl;
-    std::cout << "The result from e is " << ch_1 << std::endl;
     std::cout << "Result form std is " << cosh(x) << std::endl;
     return 0;
 }
