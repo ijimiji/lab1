@@ -12,7 +12,11 @@ int main() {
 
     double accuracy = pow(10, -k);
     double a_n = x, sh = x;
-    for (int i = 3; abs(a_n *= (x * x / i / (i - 1.0))) > accuracy; i += 2) sh += a_n;
+    int i = 3;
+    while (abs(a_n *= (x * x / i / (i - 1.0))) > accuracy) {
+        sh += a_n;
+        i += 2;
+    }
 
     std::cout << std::fixed;
     std::cout << std::setprecision(k);
