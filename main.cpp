@@ -17,7 +17,6 @@ int main() {
         sh += a_n;
         i += 2;
     }
-
     std::cout << std::fixed;
     std::cout << std::setprecision(k);
     std::cout << "The result is " << sh << std::endl;
