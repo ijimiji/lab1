@@ -21,6 +21,6 @@ int main() {
     std::cout << std::fixed;
     std::cout << std::setprecision(k);
     std::cout << "The result is " << ch << std::endl;
-    std::cout << "Result form std is " << cosh(x) << std::endl;
+    std::cout << "The result from std is " << cosh(x) << std::endl;
     return 0;
 }
