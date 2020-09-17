@@ -29,5 +29,7 @@ int main() {
     std::cout << std::setprecision(k);
     std::cout << "The result is " << ch << std::endl;
     std::cout << "The result from std is " << cosh(x) << std::endl;
+    std::cout << "The difference between the implementation and std is ";
+    std::cout << abs(round(ch, k) - round(cosh(x), k)) << std::endl;
     return 0;
 }
