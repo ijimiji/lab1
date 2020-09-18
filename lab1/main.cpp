@@ -20,7 +20,7 @@ int main() {
     double accuracy = pow(10, -k);
     double a_n = 1, ch = 1;
     int i = 2;
-    while (abs(a_n *= (x * x / i / (i - 1.0))) > accuracy) {
+    while (std::abs(a_n *= (x * x / i / (i - 1))) > accuracy) {
         ch += a_n;
         i += 2;
     }
@@ -30,6 +30,6 @@ int main() {
     std::cout << "The result is " << ch << std::endl;
     std::cout << "The result from std is " << cosh(x) << std::endl;
     std::cout << "The difference between the implementation and std is ";
-    std::cout << abs(round(ch, k) - round(cosh(x), k)) << std::endl;
+    std::cout << std::abs(round(ch, k) - round(cosh(x), k)) << std::endl;
     return 0;
 }
