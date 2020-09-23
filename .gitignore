@@ -3,3 +3,6 @@ copy.cpp
 main
 a.out
 .vscode/settings.json
+.vscode/launch.json
+lab1/main.dSYM/Contents/Info.plist
+.vscode/tasks.json
