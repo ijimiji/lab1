@@ -1,5 +1,9 @@
-// Jahor
-// Variant 10
+/* 
+    Jahor
+    Variant 10
+    No rights preserved 
+*/
+
 #include <iostream>
 #include <random> 
 
@@ -7,6 +11,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+// I don't like to think, so I use templates
 template <typename A>
 void printArray(int N, A array) {
     cout << "[";
@@ -17,9 +22,11 @@ void printArray(int N, A array) {
         }
     }
     cout << "]" << endl;
+    // [a, b, c, d, e,...]
 }
 
 int main() {
+    // Reusable variables
     int choice, arraySize, isRandom;
     while (1) {
         cout << "Enter size of an array." << endl;
@@ -32,6 +39,7 @@ int main() {
         cin >> isRandom;
 
         switch (isRandom) {
+        // Fill array manually
         case (0): {
             for (int i = 0; i < arraySize; i++) {
                 cout << "Enter " << i + 1 << "th element ";
@@ -39,6 +47,7 @@ int main() {
             }
             break;
         }
+        // Fill array with random elements
         case (1): {
             std::random_device rd;
             std::mt19937 mt(rd());
@@ -72,7 +81,8 @@ int main() {
         cout << "Enter number of task you want to check (pass 0 to exit)." << endl;
         cin >> choice;
         switch (choice) {
-        case (1): { // Swap min and max
+        // Swap first min and max
+        case (1): { 
             int min = 0;
             int max = 0;
             for (int i = 1; i < arraySize; i++) {
@@ -90,6 +100,7 @@ int main() {
             printArray(arraySize, array);
             break;
         }
+        // Calculate sum of elements after last last minimal element
         case (2): {
             // Find last minimal element
             int min = 0;
@@ -112,6 +123,8 @@ int main() {
 
         }
 
+        // Replace negative elements with there squares
+        // and print sorted array
         case (3): {
             // Replace negative elements with there squares
             for (int i = 0; i < arraySize; i++) {
@@ -133,6 +146,7 @@ int main() {
             printArray(arraySize, array);
             break;
         }
+        // Exit normally
         case (0): {
             return 0;
         }
@@ -142,17 +156,18 @@ int main() {
                 break;
         }
         }
+        // Free memory
         delete[] array;
 
-        cout << "Task " << choice << " is done." << endl;
-        cout << "Pass 1 if you want to run another task." << endl;
-        cout << "Pass 0 if you want to exit." << endl;
+        cout << "Enter 1 if you want to run another task." << endl;
+        cout << "Enter 0 if you want to exit." << endl;
         cin >> choice;
 
+        // Exit normally
         if (!choice) {
             return 0;
         }
+
         cout << "Program will run once again." << endl;
     }
-    return 0;
 }
