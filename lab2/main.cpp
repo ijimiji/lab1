@@ -1,7 +1,7 @@
-/* 
+/*
     Jahor
     Variant 10
-    No rights preserved 
+    No rights preserved
 */
 
 #include <iostream>
@@ -32,6 +32,11 @@ int main() {
         cout << "Enter size of an array." << endl;
         cin >> arraySize;
 
+        if (arraySize < 1){
+            cout << "I can't create such array :0" << endl;
+            continue;
+        }
+
         int* array = new int[arraySize];
 
         cout << "Pass 0 if you want to fill array yourself." << endl;
@@ -39,7 +44,7 @@ int main() {
         cin >> isRandom;
 
         switch (isRandom) {
-        // Fill array manually
+            // Fill array manually
         case (0): {
             for (int i = 0; i < arraySize; i++) {
                 cout << "Enter " << i + 1 << "th element ";
@@ -47,12 +52,12 @@ int main() {
             }
             break;
         }
-        // Fill array with random elements
+                // Fill array with random elements
         case (1): {
             std::random_device rd;
             std::mt19937 mt(rd());
             int minRand, maxRand;
-            cout << "Enter min element for random range." << endl;;
+            cout << "Enter min element for random range." << endl;
             cin >> minRand;
             cout << "Enter max element for random range." << endl;
             cin >> maxRand;
@@ -81,32 +86,40 @@ int main() {
         cout << "Enter number of task you want to check (pass 0 to exit)." << endl;
         cin >> choice;
         switch (choice) {
-        // Swap first min and max
-        case (1): { 
-            int min = 0;
-            int max = 0;
-            for (int i = 1; i < arraySize; i++) {
-                if (array[min] > array[i]) {
-                    min = i;
+            // Swap first min and max
+        case (1): {
+            if (arraySize > 1) {
+                int min = 0;
+                int max = 0;
+                for (int i = 1; i < arraySize; i++) {
+                    if (array[min] > array[i]) {
+                        min = i;
+                    }
+                    if (array[max] < array[i]) {
+                        max = i;
+                    }
                 }
-                if (array[max] < array[i]) {
-                    max = i;
-                }
+                int t = array[min];
+                array[min] = array[max];
+                array[max] = t;
+                cout << "Here is modified array:" << endl;
+                printArray(arraySize, array);
             }
-            int t = array[min];
-            array[min] = array[max];
-            array[max] = t;
-            cout << "Here is modified array:" << endl;
-            printArray(arraySize, array);
+            else {
+                cout << "No reason to swap min and max in one element array." << endl;
+            }
             break;
         }
-        // Calculate sum of elements after last last minimal element
+                // Calculate sum of elements after last last minimal element
         case (2): {
             // Find last minimal element
             int min = 0;
-            for (int i = 1; i < arraySize; i++) {
-                if (array[min] >= array[i]) {
-                    min = i;
+            // Dont search for minimal element is one element array
+            if (arraySize > 1) {
+                for (int i = 1; i < arraySize; i++) {
+                    if (array[min] >= array[i]) {
+                        min = i;
+                    }
                 }
             }
             int sum = 0;
@@ -120,11 +133,11 @@ int main() {
             else {
                 cout << "Can't calculate sum of elements after min because min is the last element." << endl;
             }
-
+            break;
         }
 
-        // Replace negative elements with their squares
-        // and print sorted array
+                // Replace negative elements with their squares
+                // and print sorted array
         case (3): {
             // Replace negative elements with their squares
             for (int i = 0; i < arraySize; i++) {
@@ -133,9 +146,9 @@ int main() {
                 }
             }
             // Sort with bubble sort
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < arraySize; i++) {
 
-                for (int j = i + 1; j < 10; j++)
+                for (int j = i + 1; j < arraySize; j++)
                 {
                     if (array[j] < array[i]) {
                         std::swap(array[i], array[j]);
@@ -146,14 +159,9 @@ int main() {
             printArray(arraySize, array);
             break;
         }
-        // Exit normally
+                // Exit normally
         case (0): {
             return 0;
-        }
-
-                defaut: {
-                cout << "No such task is present" << endl;
-                break;
         }
         }
         // Free memory
