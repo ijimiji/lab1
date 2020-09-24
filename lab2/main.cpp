@@ -1,3 +1,5 @@
+// Jahor
+// Variant 10
 #include <iostream>
 #include <random> 
 
@@ -5,20 +7,34 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+template <typename A>
+void printArray(int N, A array) {
+    cout << "[";
+    for (int i = 0; i < N; i++) {
+        cout << array[i];
+        if (i != N - 1) {
+            cout << ", ";
+        }
+    }
+    cout << "]" << endl;
+}
+
 int main() {
     int choice, arraySize, isRandom;
     while (1) {
-        cout << "Enter size of an array ";
+        cout << "Enter size of an array." << endl;
         cin >> arraySize;
 
         int* array = new int[arraySize];
+
         cout << "Pass 0 if you want to fill array yourself." << endl;
-        cout << "Pass 1 if you want randomly filled array ";
+        cout << "Pass 1 if you want randomly filled array." << endl;
         cin >> isRandom;
+
         switch (isRandom) {
         case (0): {
             for (int i = 0; i < arraySize; i++) {
-                cout << "Enter " << i+1 << "th element ";
+                cout << "Enter " << i + 1 << "th element ";
                 cin >> array[i];
             }
             break;
@@ -27,21 +43,24 @@ int main() {
             std::random_device rd;
             std::mt19937 mt(rd());
             int minRand, maxRand;
-            cout << "Enter min element for random range ";
+            cout << "Enter min element for random range." << endl;;
             cin >> minRand;
-            cout << "Enter max element for random range ";
+            cout << "Enter max element for random range." << endl;
             cin >> maxRand;
 
-            if (minRand > maxRand){
+            if (minRand > maxRand) {
                 std::swap(minRand, maxRand);
             }
 
             std::uniform_int_distribution<int> dist(minRand, maxRand);
 
+            cout << "Here is array of random elements:" << endl;
             for (int i = 0; i < arraySize; i++) {
                 array[i] = dist(mt);
-                std::cout << array[i] << endl;
             }
+
+            printArray(arraySize, array);
+
             break;
         }
         default: {
@@ -50,27 +69,72 @@ int main() {
         }
         }
 
-        cout << "Enter number of task you want to check (pass 0 to exit) ";
+        cout << "Enter number of task you want to check (pass 0 to exit)." << endl;
         cin >> choice;
         switch (choice) {
-        case (1): {
+        case (1): { // Swap min and max
+            int min = 0;
+            int max = 0;
+            for (int i = 1; i < arraySize; i++) {
+                if (array[min] > array[i]) {
+                    min = i;
+                }
+                if (array[max] < array[i]) {
+                    max = i;
+                }
+            }
+            int t = array[min];
+            array[min] = array[max];
+            array[max] = t;
+            cout << "Here is modified array:" << endl;
+            printArray(arraySize, array);
             break;
         }
         case (2): {
-            break;
+            // Find last minimal element
+            int min = 0;
+            for (int i = 1; i < arraySize; i++) {
+                if (array[min] >= array[i]) {
+                    min = i;
+                }
+            }
+            int sum = 0;
+            // Calculate sum of elements after min
+            if (min != arraySize - 1) {
+                for (int i = min + 1; i < arraySize; i++) {
+                    sum += array[i];
+                }
+                cout << "Sum of elements after min is " << sum << "." << endl;
+            }
+            else {
+                cout << "Can't calculate sum of elements after min because min is the last element." << endl;
+            }
+
         }
+
         case (3): {
             break;
         }
         case (0): {
             return 0;
         }
+
                 defaut: {
                 cout << "No such task is present" << endl;
                 break;
         }
         }
         delete[] array;
+
+        cout << "Task " << choice << " is done." << endl;
+        cout << "Pass 1 if you want to run another task." << endl;
+        cout << "Pass 0 if you want to exit." << endl;
+        cin >> choice;
+
+        if (!choice) {
+            return 0;
+        }
+        cout << "Program will run once again." << endl;
     }
     return 0;
 }
