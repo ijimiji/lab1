@@ -123,10 +123,10 @@ int main() {
 
         }
 
-        // Replace negative elements with there squares
+        // Replace negative elements with their squares
         // and print sorted array
         case (3): {
-            // Replace negative elements with there squares
+            // Replace negative elements with their squares
             for (int i = 0; i < arraySize; i++) {
                 if (array[i] < 0) {
                     array[i] = array[i] * array[i];
