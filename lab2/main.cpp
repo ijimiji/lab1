@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <cmath>
 #include <random> 
 
 using std::cout;
@@ -88,10 +89,10 @@ int main() {
                 int min = 0;
                 int max = 0;
                 for (int i = 1; i < arraySize; i++) {
-                    if (array[min] > array[i]) {
+                    if (std::abs(array[min]) > std::abs(array[i])) {
                         min = i;
                     }
-                    if (array[max] < array[i]) {
+                    if (std::abs(array[max]) < std::abs(array[i])) {
                         max = i;
                     }
                 }
@@ -111,7 +112,7 @@ int main() {
             // Dont search for minimal element is one element array
             if (arraySize > 1) {
                 for (int i = 1; i < arraySize; i++) {
-                    if (array[min] >= array[i]) {
+                    if (std::abs(array[min]) >= std::abs(array[i])) {
                         min = i;
                     }
                 }
