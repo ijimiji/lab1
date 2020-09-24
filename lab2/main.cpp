@@ -47,7 +47,7 @@ int main() {
             // Fill array manually
         case (0): {
             for (int i = 0; i < arraySize; i++) {
-                cout << "Enter " << i + 1 << "th element ";
+                cout << "Enter " << i + 1 << "th element: ";
                 cin >> array[i];
             }
             break;
@@ -83,11 +83,7 @@ int main() {
         }
         }
 
-        cout << "Enter number of task you want to check (pass 0 to exit)." << endl;
-        cin >> choice;
-        switch (choice) {
             // Swap first min and max
-        case (1): {
             if (arraySize > 1) {
                 int min = 0;
                 int max = 0;
@@ -102,16 +98,14 @@ int main() {
                 int t = array[min];
                 array[min] = array[max];
                 array[max] = t;
-                cout << "Here is modified array:" << endl;
+                cout << "Here is modified array after swapping:" << endl;
                 printArray(arraySize, array);
             }
             else {
                 cout << "No reason to swap min and max in one element array." << endl;
             }
-            break;
-        }
+        
                 // Calculate sum of elements after last last minimal element
-        case (2): {
             // Find last minimal element
             int min = 0;
             // Dont search for minimal element is one element array
@@ -133,12 +127,11 @@ int main() {
             else {
                 cout << "Can't calculate sum of elements after min because min is the last element." << endl;
             }
-            break;
-        }
+        
 
                 // Replace negative elements with their squares
                 // and print sorted array
-        case (3): {
+
             // Replace negative elements with their squares
             for (int i = 0; i < arraySize; i++) {
                 if (array[i] < 0) {
@@ -158,24 +151,8 @@ int main() {
             cout << "Here is sorted array:" << endl;
             printArray(arraySize, array);
             break;
-        }
-                // Exit normally
-        case (0): {
-            return 0;
-        }
-        }
+        
         // Free memory
         delete[] array;
-
-        cout << "Enter 1 if you want to run another task." << endl;
-        cout << "Enter 0 if you want to exit." << endl;
-        cin >> choice;
-
-        // Exit normally
-        if (!choice) {
-            return 0;
-        }
-
-        cout << "Program will run once again." << endl;
     }
 }
