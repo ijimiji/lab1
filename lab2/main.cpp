@@ -113,6 +113,24 @@ int main() {
         }
 
         case (3): {
+            // Replace negative elements with there squares
+            for (int i = 0; i < arraySize; i++) {
+                if (array[i] < 0) {
+                    array[i] = array[i] * array[i];
+                }
+            }
+            // Sort with bubble sort
+            for (int i = 0; i < 10; i++) {
+
+                for (int j = i + 1; j < 10; j++)
+                {
+                    if (array[j] < array[i]) {
+                        std::swap(array[i], array[j]);
+                    }
+                }
+            }
+            cout << "Here is sorted array:" << endl;
+            printArray(arraySize, array);
             break;
         }
         case (0): {
