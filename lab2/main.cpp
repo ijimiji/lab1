@@ -32,7 +32,7 @@ int main() {
     int choice, arraySize, isRandom;
     while (1) {
         cout << "Enter size of an array." << endl;
-        cout << "Size must be less than 21, bigger than 1." << endl;
+        cout << "Size must be less than " << N_MAX +1 << ", bigger than 1." << endl;
         cin >> arraySize;
 
         if (arraySize > N_MAX || arraySize < 2){
@@ -87,7 +87,6 @@ int main() {
         }
 
             // Swap first min and max
-            if (arraySize > 1) {
                 int min = 0;
                 int max = 0;
                 for (int i = 1; i < arraySize; i++) {
@@ -103,22 +102,16 @@ int main() {
                 array[max] = t;
                 cout << "Here is modified array after swapping:" << endl;
                 printArray(arraySize, array);
-            }
-            else {
-                cout << "No reason to swap min and max in one element array." << endl;
-            }
         
                 // Calculate sum of elements after last last minimal element
             // Find last minimal element
-            int min = 0;
+            min = 0;
             // Dont search for minimal element is one element array
-            if (arraySize > 1) {
                 for (int i = 1; i < arraySize; i++) {
                     if (std::abs(array[min]) >= std::abs(array[i])) {
                         min = i;
                     }
                 }
-            }
             int sum = 0;
             // Calculate sum of elements after min
             if (min != arraySize - 1) {
