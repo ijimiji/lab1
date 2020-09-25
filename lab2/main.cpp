@@ -3,10 +3,11 @@
     Variant 10
     No rights preserved
 */
-
+#define N_MAX 20
 #include <iostream>
 #include <cmath>
 #include <random> 
+
 
 using std::cout;
 using std::cin;
@@ -31,11 +32,12 @@ int main() {
     int choice, arraySize, isRandom;
     while (1) {
         cout << "Enter size of an array." << endl;
+        cout << "Size must be less than 21, bigger than 1." << endl;
         cin >> arraySize;
 
-        if (arraySize < 1){
+        if (arraySize > N_MAX || arraySize < 2){
             cout << "I can't create such array :0" << endl;
-            continue;
+            cout << "I will use the default (" << N_MAX << ")" << endl;
         }
 
         int* array = new int[arraySize];
