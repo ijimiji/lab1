@@ -112,7 +112,7 @@ int main() {
   }
 
   // Calculate sum of elements after min
-  int sum = 0;
+  double sum = 0;
   if (min != arraySize - 1) {
     for (int i = min + 1; i < arraySize; i++) {
       sum += array[i];
