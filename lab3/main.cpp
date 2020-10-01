@@ -1,5 +1,26 @@
 #include <iostream>
 
+void FreeMemory(int**& matrix, int N){
+    for (int i = 0; i < N; ++i){
+        delete[] matrix[i];
+    }
+}
+
+void CopyMatrix(int** source, int**& destination, int N){
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            destination[i][j] = source[i][j];
+        }
+    }
+}
+
+void AllocateMemory(int**& target, int N){
+    target = new int* [N];
+    for (int i = 0; i < N; i++) {
+        target[i] = new int[N];
+    }
+}
+
 int random(int min, int max) {
     static bool first = true;
     if (first)
@@ -18,14 +39,19 @@ void FillMatrix(int**& matrix, int N) {
 }
 
 void TransposeMatrix(int**& matrix, int N) {
+    int** matrixCopy;
+    AllocateMemory(matrixCopy, N);
+    CopyMatrix(matrix, matrixCopy, N);
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            matrix[i][j] = matrix[N - j - 1][N - i - 1];
+            matrix[i][j] = matrixCopy[N - j - 1][N - i - 1];
         }
     }
+    FreeMemory(matrixCopy, N);
 }
 void SolveTask1(int**& matrix, int N) {}
 void SolveTask2(int**& matrix, int N) {}
+
 void PrintMatrix(int** matrix, int N) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
@@ -36,21 +62,20 @@ void PrintMatrix(int** matrix, int N) {
 }
 int main() {
     int n;
+    int** matrix;
 
     do {
         std::cout << "Enter amount of rows and columns of a matrix" << std::endl;
         std::cin >> n;
     } while (n < 1 || n > 10);
 
-    int i = n, j = n;
-
-    int** matrix = new int* [i];
-    for (int i = 0; i < n; i++) {
-        matrix[i] = new int[j];
-    }
-
+    AllocateMemory(matrix, n);
     FillMatrix(matrix, n);
-    TransposeMatrix(matrix, n);
     PrintMatrix(matrix, n);
+    TransposeMatrix(matrix, n);
+    // SolveTask1(matrix, n);
+    // SolveTask2(matrix, n);
+    PrintMatrix(matrix, n);
+    FreeMemory(matrix, n);
     return 0;
 }
