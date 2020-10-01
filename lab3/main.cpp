@@ -1,4 +1,5 @@
 #include <iostream>
+#include "stdio.h"
 
 void FreeMemory(int**& matrix, int N) {
     for (int i = 0; i < N; ++i) {
@@ -73,8 +74,30 @@ void SolveTask1(int** matrix, int N) {
 }
 
 
-void SolveTask2(int**& matrix, int N) {
-
+void SolveTask2(int** matrix, int N) {
+    int sum = 0;
+    int min = 0;
+    for (int i = 1; i<N-1; ++i){
+        sum = 0;
+        for (int j = 0; j < N-i; ++j){
+            // printf("[%d][%d] %d\n", i+j, j, matrix[i+j][j]);
+            sum += matrix[i+j][j];
+        }
+        if (i==1||min > sum){
+            min = sum;
+        }
+    }
+    
+    for (int j = 1; j<N-1; ++j){
+        sum = 0;
+        for (int i = 0; i < N-i; ++i){
+            sum += matrix[i][i+j];
+        }
+        if (min > sum){
+            min = sum;
+        }
+    }
+    std::cout << "Minimal sum of all the diagonals is " << min << std::endl;
 }
 
 void PrintMatrix(int** matrix, int N) {
@@ -100,7 +123,7 @@ int main() {
     TransposeMatrix(matrix, n);
     PrintMatrix(matrix, n);
     SolveTask1(matrix, n);
-    // SolveTask2(matrix, n);
+    SolveTask2(matrix, n);
     FreeMemory(matrix, n);
     return 0;
 }
