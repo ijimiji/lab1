@@ -49,8 +49,14 @@ void TransposeMatrix(int**& matrix, int N) {
     }
     FreeMemory(matrixCopy, N);
 }
-void SolveTask1(int**& matrix, int N) {}
-void SolveTask2(int**& matrix, int N) {}
+
+void SolveTask1(int**& matrix, int N) {
+
+}
+
+void SolveTask2(int**& matrix, int N) {
+
+}
 
 void PrintMatrix(int** matrix, int N) {
     for (int i = 0; i < N; ++i) {
@@ -60,6 +66,7 @@ void PrintMatrix(int** matrix, int N) {
         std::cout << std::endl;
     }
 }
+
 int main() {
     int n;
     int** matrix;
