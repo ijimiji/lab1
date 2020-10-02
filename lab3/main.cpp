@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 enum Command { RandomlyFillMatrix = 0, ManuallyFillMatrix = 1 };
 
