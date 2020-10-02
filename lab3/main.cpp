@@ -78,7 +78,6 @@ void SolveTask2(int **matrix, int N) {
   for (int i = 1; i < N - 1; ++i) {
     sum = 0;
     for (int j = 0; j < N - i; ++j) {
-      // printf("[%d][%d] %d\n", i+j, j, matrix[i+j][j]);
       sum += matrix[i + j][j];
     }
     if (i == 1 || min > sum) {
