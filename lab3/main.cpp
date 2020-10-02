@@ -1,4 +1,3 @@
-#include "stdio.h"
 #include <iostream>
 
 void FreeMemory(int**& matrix, int N) {
