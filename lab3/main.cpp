@@ -42,8 +42,6 @@ void FillMatrixFromRandom(int **&matrix, int N) {
     std::cin >> maxRand;
 
     for (int i = 0; i < N; ++i) {
-        std::cout << "Enter " << N - i << " elements for ";
-        std::cout << i + 1 << "th row" << std::endl;
         for (int j = 0; j < N - i; ++j) {
             matrix[i][j] = RandInt(minRand, maxRand);
         }
@@ -75,7 +73,7 @@ void SolveTask1(int **&matrix, int N) {
 void SolveTask2(int **&matrix, int N) {
     int sum = 0;
     int min = 0;
-    for (int i = 1; i < N - 1; ++i) {
+    for (int i = 1; i < N; ++i) {
         sum = 0;
         for (int j = 0; j < N - i; ++j) {
             sum += GetMatrixElement(matrix, i + j, j, N);
@@ -85,9 +83,9 @@ void SolveTask2(int **&matrix, int N) {
         }
     }
 
-    for (int j = 1; j < N - 1; ++j) {
+    for (int j = 1; j < N; ++j) {
         sum = 0;
-        for (int i = 0; i < N - i; ++i) {
+        for (int i = 0; i < N - j; ++i) {
             sum += GetMatrixElement(matrix, i, i + j, N);
         }
         if (min > sum) {
