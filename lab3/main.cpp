@@ -128,7 +128,7 @@ int main() {
         std::cin >> n;
     } while (n < 1 || n > 10);
 
-    std::cout << "Enter 0 to fill matrix randomly.";
+    std::cout << "Enter 0 to fill matrix randomly. ";
     std::cout << "Enter 1 to fill matrix manually" << std::endl;
     std::cin >> commandInt;
 
