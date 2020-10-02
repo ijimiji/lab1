@@ -8,6 +8,7 @@ void FreeMemory(int **&matrix, int N) {
     for (int i = 0; i < N; ++i) {
         delete[] matrix[i];
     }
+    delete[] matrix;
 }
 
 int GetMatrixElement(int **&matrix, int i, int j, int N) {
