@@ -95,7 +95,7 @@ void SolveTask2(int **&matrix, int N) {
     std::cout << "Minimal sum of all the diagonals is " << min << std::endl;
 }
 
-void FillMatrixFromKeyboard(int **matrix, int N) {
+void FillMatrixFromKeyboard(int **&matrix, int N) {
     for (int i = 0; i < N; ++i) {
         std::cout << "Enter " << N - i << " elements for ";
         std::cout << i + 1 << "th row" << std::endl;
@@ -105,7 +105,7 @@ void FillMatrixFromKeyboard(int **matrix, int N) {
     }
 }
 
-void PrintMatrix(int **matrix, int N) {
+void PrintMatrix(int **&matrix, int N) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
             std::cout << GetMatrixElement(matrix, i, j, N) << "\t";
