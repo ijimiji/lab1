@@ -73,6 +73,7 @@ void SolveTask1(int **&matrix, int N) {
     }
 }
 
+// Consider a[0][n-1] and a[n-1][0] diagonals
 void SolveTask2(int **&matrix, int N) {
     int sum = 0;
     int min = 0;
@@ -127,9 +128,8 @@ int main() {
         std::cin >> n;
     } while (n < 1 || n > 10);
 
-    std::cout
-        << "Enter 0 to fill matrix randomly. Enter 1 to fill matrix manually"
-        << std::endl;
+    std::cout << "Enter 0 to fill matrix randomly.";
+    std::cout << "Enter 1 to fill matrix manually" << std::endl;
     std::cin >> commandInt;
 
     AllocateMemory(matrix, n);
