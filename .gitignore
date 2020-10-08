@@ -6,3 +6,9 @@ a.out
 .vscode/launch.json
 lab1/main.dSYM/Contents/Info.plist
 .vscode/tasks.json
+.idea/cpp-labs.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+cmake-build-debug/CMakeFiles/clion-log.txt
+lab3/tempCodeRunnerFile.cpp
