@@ -75,6 +75,7 @@ int main() {
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
+    input_fileA.close();
     // Task B
 
     if (input_fileB.is_open()) {
@@ -99,4 +100,5 @@ int main() {
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
+    input_fileB.close();
 }
