@@ -38,7 +38,7 @@ void strCopy(char *source, char *dest) {
     dest[i] = '\0';
 }
 
-bool strFromDigits(const char *string) {
+bool strIsMadeOfDigits(const char *string) {
     bool is_digit = true;
     while (*string) {
         if (!isDigit(*string))
@@ -88,14 +88,14 @@ std::vector<int> countWordsInFile(const char *file) {
     return arr;
 }
 
-void findMaxZeroDigitWord(char *word, int &n, int &n_max, char *last,
+void findWordWithMaxZeros(char *word, int &n, int &n_max, char *last,
                           char *last_but_one) {
-    if (strFromDigits(word)) {
+    if (strIsMadeOfDigits(word)) {
         n = countChar(word, '0');
         if (n > n_max) {
             n_max = n;
-            strCopy(word, last);
             strCopy(last, last_but_one);
+            strCopy(word, last);
         }
         if (n == n_max && n != 0) {
             strCopy(last, last_but_one);
@@ -105,19 +105,21 @@ void findMaxZeroDigitWord(char *word, int &n, int &n_max, char *last,
 }
 
 int main() {
+    char word[N];
+    char subWord[N];
+    char line[N];
     char last[N];
     char last_but_one[N];
-    char word[N];
-    char line[N];
-    char subWord[N];
     int n = 0, n_max = 0;
-    std::vector<int> wordsN;
+
+    std::vector<int> amountOfWordsInFile;
+
     std::fstream input_fileA("input_a", std::fstream::in);
     std::fstream input_fileB("input_b", std::fstream::in);
 
     // Task A
-    wordsN = countWordsInFile("input_a");
-    for (auto wN : wordsN) {
+    amountOfWordsInFile = countWordsInFile("input_a");
+    for (auto amountOfWordsInLine : amountOfWordsInFile) {
         input_fileA >> word;
         input_fileA >> subWord;
         std::cout << _strspn(word, subWord) << std::endl;
@@ -125,17 +127,17 @@ int main() {
     input_fileA.close();
 
     // Task B
-    wordsN = countWordsInFile("input_b");
-
-    for (auto wN : wordsN) {
+    amountOfWordsInFile = countWordsInFile("input_b");
+    for (auto wN : amountOfWordsInFile) {
         for (int i = 0; i < wN; ++i) {
             input_fileB >> word;
-            findMaxZeroDigitWord(word, n, n_max, last, last_but_one);
+            findWordWithMaxZeros(word, n, n_max, last, last_but_one);
         }
         if (n_max == 0) {
             std::cout << "No words with zeros are found" << std::endl;
         } else
             printString(last_but_one);
+
         n = 0;
         n_max = 0;
     }
