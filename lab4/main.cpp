@@ -1,7 +1,7 @@
 //  Var 10
 #include <fstream>
 #include <iostream>
-#include <vector>
+#define N 300
 
 std::fstream input_fileA("input_a", std::fstream::in);
 std::fstream input_fileB("input_b", std::fstream::in);
@@ -62,22 +62,23 @@ void printString(const char *string) {
 }
 
 int main() {
-    char last[300];         // 300 for the border case
-    char last_but_one[300]; // After all its just 900 bytes...
-    char word[300];
-    char subWord[300];
+    char last[N];
+    char last_but_one[N];
+    char word[N];
+    char subWord[N];
     int n = 0, n_max = 0;
 
+    // Task A
     if (input_fileA.is_open()) {
         input_fileA >> word;
         input_fileA >> subWord;
         std::cout << _strspn(word, subWord) << std::endl;
+        input_fileA.close();
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
-    input_fileA.close();
-    // Task B
 
+    // Task B
     if (input_fileB.is_open()) {
         while (input_fileB >> word) {
             if (strFromDigits(word)) {
@@ -97,8 +98,9 @@ int main() {
             std::cout << "No words containing zeros found." << std::endl;
         } else
             printString(last_but_one);
+        input_fileB.close();
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
-    input_fileB.close();
 }
+
