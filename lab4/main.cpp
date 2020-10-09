@@ -1,6 +1,7 @@
 //  Var 10
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #define N 300
 
 std::fstream input_fileA("input_a", std::fstream::in);
@@ -62,45 +63,59 @@ void printString(const char *string) {
 }
 
 int main() {
+    std::stringstream ss;
     char last[N];
     char last_but_one[N];
     char word[N];
+    char line[N];
     char subWord[N];
     int n = 0, n_max = 0;
 
     // Task A
     if (input_fileA.is_open()) {
-        input_fileA >> word;
-        input_fileA >> subWord;
-        std::cout << _strspn(word, subWord) << std::endl;
+        while (input_fileA.getline(line, N)) {
+            ss.str(line);
+            ss >> word;
+            ss >> subWord;
+            std::cout << _strspn(word, subWord) << std::endl;
+            ss.clear();
+        }
         input_fileA.close();
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
 
     // Task B
+
     if (input_fileB.is_open()) {
-        while (input_fileB >> word) {
-            if (strFromDigits(word)) {
-                n = countChar(word, '0');
-                if (n > n_max) {
-                    n_max = n;
-                    strCopy(word, last);
-                    strCopy(last, last_but_one);
-                }
-                if (n == n_max && n != 0) {
-                    strCopy(last, last_but_one);
-                    strCopy(word, last);
+        while (input_fileB.getline(line, N)) {
+            ss.str(line);
+            while (ss >> word) {
+                if (strFromDigits(word)) {
+                    n = countChar(word, '0');
+                    if (n > n_max) {
+                        n_max = n;
+                        strCopy(word, last);
+                        strCopy(last, last_but_one);
+                    }
+                    if (n == n_max && n != 0) {
+                        strCopy(last, last_but_one);
+                        strCopy(word, last);
+                    }
                 }
             }
+            if (n_max == 0) {
+                std::cout << "No words containing zeros found." << std::endl;
+            } else {
+                printString(last_but_one);
+            }
+
+            n_max = 0;
+            n = 0;
+            ss.clear();
         }
-        if (n_max == 0) {
-            std::cout << "No words containing zeros found." << std::endl;
-        } else
-            printString(last_but_one);
         input_fileB.close();
     } else {
         std::cout << "AAAAAAAA! CANT FIND DATA!" << std::endl;
     }
 }
-
