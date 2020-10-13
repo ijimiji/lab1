@@ -12,15 +12,6 @@ bool isDelphiComment(std::string line) {
     return false;
 }
 
-std::string trimDelphiComment(std::string comment) {
-    std::string trimmedComment = "";
-    int n = comment.length();
-    for (int i = 2; i < n; ++i) {
-        trimmedComment = trimmedComment + comment[i];
-    }
-    return trimmedComment;
-}
-
 std::vector<std::string> readFile(std::string fileName) {
     std::ifstream inputFile(fileName);
     std::string line;
@@ -77,7 +68,6 @@ flattenFileContent(std::vector<std::string> fileContent) {
 
 std::vector<std::tuple<int, int, std::string>>
 findDelphiComments(std::vector<std::string> lines) {
-    // std::tuple<int, int, std::string> commentsGroup;
     std::vector<std::tuple<int, int, std::string>> commentsGroups;
     bool previousIsComment = false;
     int patternsInGroup = 0;
@@ -110,9 +100,6 @@ findDelphiComments(std::vector<std::string> lines) {
 std::string convertToString(std::string x) { return x; }
 
 std::string convertToString(int x) { return std::to_string(x); }
-
-// enum RecordFild { repeatingString = 1,  }
-// std::string makeRecord(std::vector<std::string>) {}
 
 std::string recordToString(std::tuple<int, int, std::string> record) {
     std::string stringRecord = "";
