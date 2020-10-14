@@ -74,7 +74,7 @@ findDelphiComments(std::vector<std::string> lines) {
     int lineNumber;
     std::string pattern;
     int n = lines.size();
-
+    
     std::string line;
     for (int i = 0; i < n; ++i, line = lines[i]) {
         if (isDelphiComment(line)) {
@@ -103,7 +103,10 @@ std::string convertToString(int x) { return std::to_string(x); }
 
 std::string recordToString(std::tuple<int, int, std::string> record) {
     std::string stringRecord = "";
-    auto [lineNumber, patternsInGroup, pattern] = record;
+    int lineNumber = std::get<0>(record);
+    int patternsInGroup = std::get<1>(record);
+    std::string pattern = std::get<2>(record);
+
     stringRecord = stringRecord + pattern;
     stringRecord =
         stringRecord + " | " + "found on line " + std::to_string(lineNumber);
