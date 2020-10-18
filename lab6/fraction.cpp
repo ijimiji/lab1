@@ -10,13 +10,11 @@ Fraction::Fraction(Fraction const &fraction) {
 Fraction::Fraction(int a, int b) {
     numerator = a;
     denominator = b;
-    integer = 0;
 }
 
 Fraction::Fraction(int a, int b, bool simplify) {
     numerator = a;
     denominator = b;
-    integer = 0;
     if (simplify)
         ConvertToSimple();
 }
@@ -28,12 +26,21 @@ Fraction::Fraction() {
 }
 
 void Fraction::Print() {
+  int integer = numerator / denominator;
+  numerator = numerator - integer * denominator;
+
   if (integer !=0 ){
     std::cout << integer ;
   }
   if (numerator != 0 ) {
-    std::cout << numerator << ((integer != 0) ? " + " : "") << "/" << denominator << std::endl;
+    std::cout << ((integer != 0) ? " + " : "") << numerator  << "/" << denominator;
+  } 
+
+  if (numerator == 0 && integer ==0 ) {
+    std::cout << 0;
   }
+
+  std::cout << std::endl;
 }
 
 int Fraction::GCD(int a, int b) {
@@ -44,7 +51,7 @@ int Fraction::GCD(int a, int b) {
             b = b % a;
         }
     }
-    return a + b;
+    return std::abs(a + b);
 }
 
 int Fraction::LCM(int a, int b) { return std::abs(a * b) / GCD(a, b); }
@@ -54,17 +61,17 @@ void Fraction::ConvertToSimple() {
     numerator = numerator / gcd;
     denominator = denominator / gcd;
 
-    integer = numerator / denominator;
-    numerator = numerator - (integer * denominator);
-    if (numerator == 0) {
-      denominator = 0;
-    }
+    // integer = numerator / denominator;
+    // numerator = numerator - (integer * denominator);
+    // if (numerator == 0) {
+    //   denominator = 0;
+    // }
 }
 
-void Fraction::ConvertToIrregural() {
-    numerator = (integer * denominator) + numerator;
-    integer = 0;
-}
+// void Fraction::ConvertToIrregural() {
+//     numerator = (integer * denominator) + numerator;
+//     integer = 0;
+// }
 
 int Fraction::GetDenominator() { return denominator; }
 
@@ -75,7 +82,7 @@ void Fraction::SetNumerator(int number) { numerator = number; }
 void Fraction::SetDenominator(int number) { denominator = number; }
 
 void Fraction::DumbDivide(Fraction const &number) {
-    ConvertToIrregural();
+    // ConvertToIrregural();
     numerator = numerator * number.denominator;
     denominator = denominator * number.numerator;
 };
@@ -88,7 +95,7 @@ void Fraction::Divide(Fraction const &number, bool simplify) {
         ConvertToSimple();
 };
 void Fraction::DumbMultiply(Fraction const &number) {
-    ConvertToIrregural();
+    // ConvertToIrregural();
     numerator = number.numerator * numerator;
     denominator = number.denominator * denominator;
 };

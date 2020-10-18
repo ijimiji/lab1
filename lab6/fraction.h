@@ -2,7 +2,6 @@ class Fraction {
   private:
     int denominator;
     int numerator;
-    int integer;
     void DumbAdd(const Fraction &);
     void DumbMultiply(const Fraction &);
     void DumbDivide(const Fraction &);
