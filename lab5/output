@@ -1,3 +1,3 @@
-// Foo | found on line 1 | 5 occurences
-// Bar | found on line 7 | 1 occurences
-// Bar | found on line 9 | 1 occurences
+// Foo | found on line 2 | occurences: 5
+// Bar | found on line 8 | occurences: 1
+// Bar | found on line 10 | occurences: 2
