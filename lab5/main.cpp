@@ -1,4 +1,3 @@
-
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -83,11 +82,8 @@ findDelphiGroups(std::vector<std::string> lines) {
   bool staged = true;
   int N = lines.size() - 1;
   int n = 1;
-  printFileContent(lines);
-
   for (auto line : lines) {
     if (isDelphiComment(line)) {
-
       if (staged) {
         pattern = line;
         lineNumber = n;
@@ -104,11 +100,11 @@ findDelphiGroups(std::vector<std::string> lines) {
         lineNumber = n;
         pattern = line;
       }
+      
       if (line == lines[N]) {
         auto record = std::make_tuple(lineNumber, occurences, pattern);
         commentsGroups.push_back(record);
       }
-
     } else {
       if (!staged) {
         auto record = std::make_tuple(lineNumber, occurences, pattern);
@@ -119,7 +115,6 @@ findDelphiGroups(std::vector<std::string> lines) {
     }
     ++n;
   }
-
   return commentsGroups;
 }
 
