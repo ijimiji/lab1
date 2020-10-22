@@ -45,6 +45,7 @@ std::string selectFile() {
     std::cout << "Confirm file selection [y/n]" << std::endl;
     std::cin >> choice;
   } while (choice != "y");
+  // Create empty file if it's not present
   if (fileContent.size() == 0) {
     std::ofstream empty_file(fileName);
     empty_file.close();
@@ -53,6 +54,7 @@ std::string selectFile() {
 }
 
 std::string flattenString(std::string nestedString) {
+  // Return string with no blank charactes at the beginning 
   std::stringstream ss(nestedString);
   std::string string = "";
   std::string temp;
@@ -74,14 +76,13 @@ flattenFileContent(std::vector<std::string> fileContent) {
 std::vector<std::tuple<int, int, std::string>>
 findDelphiGroups(std::vector<std::string> lines) {
   std::vector<std::tuple<int, int, std::string>> commentsGroups;
-
-  int patternsInGroup = 0;
   int occurences = 0;
   int lineNumber;
   std::string pattern;
-  bool staged = true;
+  bool staged = true; // If group is pushed to vector it's staged
   int N = lines.size() - 1;
   int n = 1;
+  
   for (auto line : lines) {
     if (isDelphiComment(line)) {
       if (staged) {
@@ -100,7 +101,7 @@ findDelphiGroups(std::vector<std::string> lines) {
         lineNumber = n;
         pattern = line;
       }
-      
+      // Check if it's the last line
       if (line == lines[N]) {
         auto record = std::make_tuple(lineNumber, occurences, pattern);
         commentsGroups.push_back(record);
