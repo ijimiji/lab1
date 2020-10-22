@@ -1,3 +1,4 @@
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -35,14 +36,20 @@ void printFileContent(std::vector<std::string> fileContent) {
 
 std::string selectFile() {
   std::string fileName, choice;
+  std::vector<std::string> fileContent;
   do {
     std::cout << "Select file to open:" << std::endl;
     std::cin >> fileName;
-    std::cout << "Here is content of " << fileName << ":" << std::endl;
-    printFileContent(readFile(fileName));
+    std::cout << "Here is the content of " << fileName << ":" << std::endl;
+    fileContent = readFile(fileName);
+    printFileContent(fileContent);
     std::cout << "Confirm file selection [y/n]" << std::endl;
     std::cin >> choice;
   } while (choice != "y");
+  if (fileContent.size() == 0) {
+    std::ofstream empty_file(fileName);
+    empty_file.close();
+  }
   return fileName;
 }
 
@@ -66,34 +73,53 @@ flattenFileContent(std::vector<std::string> fileContent) {
 }
 
 std::vector<std::tuple<int, int, std::string>>
-findDelphiComments(std::vector<std::string> lines) {
+findDelphiGroups(std::vector<std::string> lines) {
   std::vector<std::tuple<int, int, std::string>> commentsGroups;
 
   int patternsInGroup = 0;
+  int occurences = 0;
   int lineNumber;
   std::string pattern;
+  bool staged = true;
+  int N = lines.size() - 1;
+  int n = 1;
+  printFileContent(lines);
 
-  std::string line;
-  bool previousIsComment = false;
-  int n = lines.size();
-
-  for (int i = 0; i < n; line = lines[i], ++i) {
+  for (auto line : lines) {
     if (isDelphiComment(line)) {
-      if (!previousIsComment) {
-        lineNumber = i + 1;
+
+      if (staged) {
         pattern = line;
-      };
-      ++patternsInGroup;
-      previousIsComment = true;
-    } else {
-      if (previousIsComment) {
-        commentsGroups.push_back(
-            std::make_tuple(lineNumber, patternsInGroup, pattern));
-        patternsInGroup = 0;
+        lineNumber = n;
+        staged = false;
       }
-      previousIsComment = false;
+
+      if (line == pattern) {
+        ++occurences;
+      } else {
+        auto record = std::make_tuple(lineNumber, occurences, pattern);
+        commentsGroups.push_back(record);
+        staged = false;
+        occurences = 1;
+        lineNumber = n;
+        pattern = line;
+      }
+      if (line == lines[N]) {
+        auto record = std::make_tuple(lineNumber, occurences, pattern);
+        commentsGroups.push_back(record);
+      }
+
+    } else {
+      if (!staged) {
+        auto record = std::make_tuple(lineNumber, occurences, pattern);
+        commentsGroups.push_back(record);
+        staged = true;
+        occurences = 0;
+      }
     }
+    ++n;
   }
+
   return commentsGroups;
 }
 
@@ -109,9 +135,9 @@ std::string recordToString(std::tuple<int, int, std::string> record) {
 
   stringRecord = stringRecord + pattern;
   stringRecord =
-      stringRecord + " | " + "found on line " + std::to_string(lineNumber);
+      stringRecord + "\t| " + "found on line " + std::to_string(lineNumber);
   stringRecord =
-      stringRecord + " | occurences: " + std::to_string(patternsInGroup);
+      stringRecord + "\t| occurences: " + std::to_string(patternsInGroup);
   stringRecord = stringRecord + '\n';
   return stringRecord;
 }
@@ -136,14 +162,21 @@ void solveTask() {
   auto fileName = selectFile();
   auto fileContent = readFile(fileName);
   auto flattenedFileContent = flattenFileContent(fileContent);
-  printFileContent(flattenedFileContent);
-  auto delphiComments = findDelphiComments(flattenedFileContent);
+  auto delphiComments = findDelphiGroups(flattenedFileContent);
   auto outputFileContent = makeFileFromRecords(delphiComments);
   writeFile(outputFileContent);
 }
 
+class App {
+public:
+  static void Main() {
+    solveTask();
+    std::cout << "Here is the content of output file" << std::endl;
+    printFileContent(readFile("output"));
+  }
+};
+
 int main() {
-  solveTask();
-  printFileContent(readFile("output"));
+  App::Main();
   return 0;
 }
