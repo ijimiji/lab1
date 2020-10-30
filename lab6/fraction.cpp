@@ -1,6 +1,8 @@
 #include "fraction.h"
 #include <cstdlib>
 #include <iostream>
+#include <ostream>
+
 
 Fraction::Fraction(Fraction const &fraction) {
     numerator = fraction.numerator;
@@ -13,10 +15,15 @@ Fraction::Fraction(int a, int b) {
 }
 
 Fraction::Fraction(int a, int b, bool simplify) {
-    numerator = a;
+  if (b == 0){
+    std::cout << "Can't create Fraction object with 0 as a denominator" << std::endl;;
+    std::exit(1);
+  }
+  numerator = a;
     denominator = b;
-    if (simplify)
+    if (simplify){
         ConvertToSimple();
+    }
 }
 
 Fraction::Fraction() {
@@ -26,21 +33,42 @@ Fraction::Fraction() {
 }
 
 void Fraction::Print() {
-  int integer = numerator / denominator;
-  numerator = numerator - integer * denominator;
+    bool isNegative = false;
 
-  if (integer !=0 ){
-    std::cout << integer ;
-  }
-  if (numerator != 0 ) {
-    std::cout << ((integer != 0) ? " + " : "") << numerator  << "/" << denominator;
-  } 
+    if (numerator * denominator < 0) {
+      numerator = std::abs(numerator);
+      denominator = std::abs(denominator);
+      isNegative = true;
+    }
+    
+    int integer = numerator / denominator;
+    numerator = numerator - integer * denominator;
+    
+    if (isNegative && numerator != 0){
+       std::cout << "-(";
+    } else if(isNegative){
+      std::cout << "-";
+    }
+    
+    if (integer != 0) {
+        std::cout << integer;
+    }
+    
+    if (numerator != 0) {
+        std::cout << ((integer != 0) ? " + " : "") << numerator << "/"
+                  << denominator;
+    }
 
-  if (numerator == 0 && integer ==0 ) {
-    std::cout << 0;
-  }
+    if (numerator == 0 && integer == 0) {
+        std::cout << 0;
+    }
 
-  std::cout << std::endl;
+    
+    if (isNegative && numerator != 0){
+        std::cout << ")";
+    }
+
+    std::cout << std::endl;
 }
 
 int Fraction::GCD(int a, int b) {
@@ -57,21 +85,10 @@ int Fraction::GCD(int a, int b) {
 int Fraction::LCM(int a, int b) { return std::abs(a * b) / GCD(a, b); }
 
 void Fraction::ConvertToSimple() {
-    int gcd = GCD(numerator, denominator);
+    int gcd = GCD(abs(numerator), abs(denominator));
     numerator = numerator / gcd;
     denominator = denominator / gcd;
-
-    // integer = numerator / denominator;
-    // numerator = numerator - (integer * denominator);
-    // if (numerator == 0) {
-    //   denominator = 0;
-    // }
 }
-
-// void Fraction::ConvertToIrregural() {
-//     numerator = (integer * denominator) + numerator;
-//     integer = 0;
-// }
 
 int Fraction::GetDenominator() { return denominator; }
 
@@ -82,7 +99,6 @@ void Fraction::SetNumerator(int number) { numerator = number; }
 void Fraction::SetDenominator(int number) { denominator = number; }
 
 void Fraction::DumbDivide(Fraction const &number) {
-    // ConvertToIrregural();
     numerator = numerator * number.denominator;
     denominator = denominator * number.numerator;
 };
@@ -94,6 +110,7 @@ void Fraction::Divide(Fraction const &number, bool simplify) {
     if (simplify)
         ConvertToSimple();
 };
+
 void Fraction::DumbMultiply(Fraction const &number) {
     // ConvertToIrregural();
     numerator = number.numerator * numerator;
@@ -125,3 +142,4 @@ void Fraction::Add(Fraction const &number, bool simplify) {
     if (simplify)
         ConvertToSimple();
 };
+
