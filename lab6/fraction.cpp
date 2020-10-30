@@ -112,7 +112,6 @@ void Fraction::Divide(Fraction const &number, bool simplify) {
 };
 
 void Fraction::DumbMultiply(Fraction const &number) {
-    // ConvertToIrregural();
     numerator = number.numerator * numerator;
     denominator = number.denominator * denominator;
 };
