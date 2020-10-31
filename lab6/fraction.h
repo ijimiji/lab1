@@ -5,8 +5,9 @@ class Fraction {
     void DumbAdd(const Fraction &);
     void DumbMultiply(const Fraction &);
     void DumbDivide(const Fraction &);
-  public:
     Fraction();
+
+  public:
     Fraction(int, int);
     Fraction(int, int, bool);
     Fraction(const Fraction &);

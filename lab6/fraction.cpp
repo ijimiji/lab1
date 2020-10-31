@@ -26,12 +26,6 @@ Fraction::Fraction(int a, int b, bool simplify) {
     }
 }
 
-Fraction::Fraction() {
-    std::cout << "I'm a simple program. I see no number, I do exit."
-              << std::endl;
-    std::exit(1);
-}
-
 void Fraction::Print() {
     bool isNegative = false;
 
