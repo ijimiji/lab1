@@ -36,6 +36,7 @@ void App::Main() {
     Fraction t(12, 3);
     Fraction z(5, 13);
     t.Multiply(z, false);
-    std::cout << t.GetNumerator() << "/" << t.GetDenominator() << std::endl; // 60/39
-    t.Print(); // 1 + 7/13 aka 20/13
+    std::cout << t.GetNumerator() << "/" << t.GetDenominator()
+              << std::endl; // 60/39
+    t.Print();              // 1 + 7/13 aka 20/13
 }
