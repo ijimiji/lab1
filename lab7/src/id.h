@@ -5,7 +5,7 @@ class UniqueID {
     static int nextID;
 
   public:
-    int id;
+    int value;
     UniqueID();
 };
 

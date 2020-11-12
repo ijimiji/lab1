@@ -2,6 +2,6 @@
 int UniqueID::nextID = 0;
 
 UniqueID::UniqueID() {
-   id = ++nextID;
+   value = ++nextID;
 }
 
