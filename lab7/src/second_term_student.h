@@ -13,8 +13,9 @@ protected:
 public:
   static std::vector<STermStudent*> GetStudents() { return students; }
   STermStudent(const FTermStudent&, std::array <int, 5>);
+  STermStudent(char * _name, int _group, int _course, std::array<int, 4> ftermMarks, std::array<int, 5> stermMarks);
   STermStudent(const FTermStudent&, int, int, int, int, int);
-  double GetAverageMark();
+  virtual double GetAverageMark();
   void ChangeMarks(std::array<int, 5>);
   std::array<int, 5> GetMarks() const;
   std::array<int, 4> GetFTermMarks() const;

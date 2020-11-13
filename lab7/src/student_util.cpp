@@ -1,20 +1,18 @@
 #include "student_util.h"
 
-std::vector<std::pair<STermStudent*, StudentType>> StudentUtil::GetStudents() {
-    std::vector<std::pair<STermStudent*, StudentType>> students;
+std::vector<Student*> StudentUtil::GetStudents() {
+    std::vector<Student*> students;
 
     for (auto student : Student::students) {
-        auto ptr = static_cast<STermStudent*>(student);
-        students.push_back(std::make_pair(ptr, STUDENT));
+        students.push_back(student);
     }
 
     for (auto student : FTermStudent::students) {
-        auto ptr = static_cast<STermStudent*>(student);
-        students.push_back(std::make_pair(ptr, FTERMSTUDENT));
+        students.push_back(student);
     }
 
     for (auto student : STermStudent::students) {
-        students.push_back(std::make_pair(student, STERMSTUDENT));
+        students.push_back(student);
     }
 
     return students;
@@ -24,9 +22,7 @@ double StudentUtil::CalculateAverageMarkOfGroupAfterSession(int group, int sessi
     double sum = 0; int amountOfStudents = 0;
 
     if (session == 1) {
-
         auto students = FTermStudent::GetStudents();
-
         for (auto student : students) {
             if (student->group == group) {
                 sum += student->GetAverageMark();
@@ -37,8 +33,8 @@ double StudentUtil::CalculateAverageMarkOfGroupAfterSession(int group, int sessi
         if (amountOfStudents) {
             return sum / amountOfStudents;
         }
-        return 0;
     }
+
     else if (session == 2) {
         auto students = STermStudent::GetStudents();
         for (auto student : students) {
@@ -46,32 +42,34 @@ double StudentUtil::CalculateAverageMarkOfGroupAfterSession(int group, int sessi
                 sum += student->GetAverageMark();
                 ++amountOfStudents;
             }
-            if (amountOfStudents) {
-                return sum / amountOfStudents;
-            }
-            return 0;
         }
-        return 0;
+
+        if (amountOfStudents) {
+            return sum / amountOfStudents;
+        }
     }
+
     return 0;
 }
 
 double StudentUtil::CalculateAverageMarkOfAll() {
-    double sum = 0; int amountOfStudents = 0;
+    double sum = 0;
+    double mark;
+    int amountOfStudents = 0;
+
     auto students = GetStudents();
+
     for (auto student : students) {
-        if (student.second == STERMSTUDENT) {
-            sum += student.first->GetAverageMark();
-            ++amountOfStudents;
-        }
-        else if (student.second == FTERMSTUDENT) {
-            auto ptr = static_cast<FTermStudent*>(student.first);
-            sum += ptr->GetAverageMark();
+        mark = student->GetAverageMark();
+        if (mark) {
+            sum += mark;
             ++amountOfStudents;
         }
     }
-    if (amountOfStudents != 0) {
+
+    if (amountOfStudents){
         return sum / amountOfStudents;
     }
+
     return 0;
 }

@@ -29,6 +29,7 @@ public:
   void SetCourse(int _course);
   void SetGroup(int _group);
   void PrintID();
+  virtual double GetAverageMark(){ return 0;}
   friend std::ostream& operator<<(std::ostream& os, const Student& student);
   friend class StudentUtil;
 };

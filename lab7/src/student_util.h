@@ -5,11 +5,9 @@
 
 #ifndef STUDENT_UTIL_H
 #define STUDENT_UTIL_H
-
-enum StudentType { STUDENT, FTERMSTUDENT, STERMSTUDENT };
 class StudentUtil {
 public:
-    static std::vector<std::pair<STermStudent*, StudentType>> GetStudents();
+    static std::vector<Student *> GetStudents();
     static double CalculateAverageMarkOfGroupAfterSession(int group, int session);
     static double CalculateAverageMarkOfAll();
 };

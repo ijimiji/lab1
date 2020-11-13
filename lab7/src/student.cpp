@@ -3,17 +3,17 @@
 
 std::vector<Student*> Student::students;
 
-Student::Student(char* nameIO, int groupIO, int courseIO) : id(), personal_id(id.value), record_book_id(id.value)
+Student::Student(char* _name, int _group, int _course) : id(), personal_id(id.value), record_book_id(id.value)
 {
-  name = nameIO;
-  group = groupIO;
-  course = courseIO;
+  name = _name;
+  group = _group;
+  course = _course;
   students.push_back(this);
 }
 
 Student::Student(const Student& student)
-  : id(student.id),
-  record_book_id(id.value),
+  : id(),
+  record_book_id(student.record_book_id),
   personal_id(id.value),
   name(student.name),
   group(student.group),

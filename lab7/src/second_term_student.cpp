@@ -7,17 +7,17 @@ STermStudent::STermStudent(const FTermStudent& student, std::array <int, 5> mark
 
 std::vector<STermStudent*> STermStudent::students;
 
-STermStudent::STermStudent(const FTermStudent& student, int mark1, int mark2, int mark3, int mark4, int mark5)
-    : FTermStudent(student) {
-    std::array<int, 5>  marks;
-    marks[0] = mark1;
-    marks[1] = mark2;
-    marks[2] = mark3;
-    marks[3] = mark4;
-    marks[4] = mark5;
-    stermMarks = marks;
+STermStudent::STermStudent(char * _name, int _group, int _course, std::array<int, 4> ftermMarks, std::array<int, 5> stermMarks)
+    : stermMarks(stermMarks), FTermStudent(_name, _group, _course, ftermMarks) {
     students.push_back(this);
 };
+
+STermStudent::STermStudent(const FTermStudent& student, int mark1, int mark2, int mark3, int mark4, int mark5)
+    : FTermStudent(student) {
+    std::array<int, 5>  stermMarks = {mark1, mark2, mark3, mark4, mark5 };
+    students.push_back(this);
+};
+
 double STermStudent::GetAverageMark() {
     int sum = 0;
     for (int mark : ftermMarks) {

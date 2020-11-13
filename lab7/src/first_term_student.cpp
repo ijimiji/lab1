@@ -2,18 +2,20 @@
 
 std::vector<FTermStudent*> FTermStudent::students;
 
-FTermStudent::FTermStudent(const Student& student, std::array<int, 4> ftermMarks)
-    : Student(student), ftermMarks(ftermMarks) {
+FTermStudent::FTermStudent(char * _name, int _group, int _course, std::array<int, 4> ftermMarks)
+    : ftermMarks(ftermMarks), Student(_name, _group, _course) {
     students.push_back(this);
 };
 
 FTermStudent::FTermStudent(const Student& student, int mark1, int mark2, int mark3, int mark4)
     : Student(student) {
-    std::array<int, 4>  marks;
-    marks[0] = mark1;
-    marks[1] = mark2;
-    marks[2] = mark3;
-    marks[3] = mark4;
+    std::array<int, 4>  marks = {mark1, mark2, mark3, mark4};
+    ftermMarks = marks;
+    students.push_back(this);
+};
+FTermStudent::FTermStudent(char * _name, int _group, int _course, int mark1, int mark2, int mark3, int mark4)
+    : Student(_name, _group, _course) {
+    std::array<int, 4>  marks = {mark1, mark2, mark3, mark4};
     ftermMarks = marks;
     students.push_back(this);
 };

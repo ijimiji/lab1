@@ -49,20 +49,32 @@
 */
 
 void App::Main() {
-    Student pupa("Pupa", 1, 1);
-    Student lupa("Lupa", 1, 1);
-    Student duba("Duba", 5, 1);
+    STermStudent dubas("Dubas", 5, 1, {5, 6, 7, 7}, {4, 4, 4, 5, 6});
+    FTermStudent lupa("Lupa", 3, 1, {10, 5, 8, 9});
+    Student pupa("Pupa", 4, 1);
 
-    FTermStudent pupaF(pupa, 7, 9, 4, 4);
-    FTermStudent lupaF(lupa, 5, 10, 4, 7);
-    FTermStudent dubaF(duba, 5, 4, 4, 5);
+    // FTermStudent zhmyx("Zhmyx", 4, 1, {10, 9, 9, 8});
+    STermStudent buba("Buba", 4, 1, {7, 9, 6, 4}, {9, 9, 8, 8, 8});
+    STermStudent oleg("Oleg", 4, 1, {10, 9, 6, 5}, {10, 7, 8, 8, 10});
+    STermStudent kuka("Kuka", 4, 1, {6, 9, 6, 4}, {9, 7, 8, 8, 9});
 
-    STermStudent pupaS(pupaF, 7, 9, 4, 4, 10);
-    STermStudent lupaS(lupaF, 5, 10, 4, 5, 9);
-    STermStudent dubaS(dubaF, 5, 4, 4, 5, 6);
+    // We have 3 Gimbitskys in the first group. 
+    // Nice way to show copy constructor
+    FTermStudent gymbytsky1("Gymbytsky", 1, 1, {10, 10, 9, 10});
+    std::cout << gymbytsky1.GetPersonalID() << ' ' << gymbytsky1.GetRecordBookID() << std::endl;
+    FTermStudent gymbytsky2(gymbytsky1);
+    std::cout << gymbytsky2.GetPersonalID() << ' ' << gymbytsky1.GetRecordBookID() << std::endl;
+    FTermStudent gymbytsky3(gymbytsky1);
+    std::cout << gymbytsky3.GetPersonalID() << ' ' << gymbytsky1.GetRecordBookID() << std::endl;
 
-    std::cout << dubaS << std::endl;
-
+    std::cout << "Average mark of the first group is: ";
     std::cout << StudentUtil::CalculateAverageMarkOfGroupAfterSession(1, 1) << std::endl;
+    std::cout << "Average mark of the fourth group is: ";
+    std::cout << StudentUtil::CalculateAverageMarkOfGroupAfterSession(4, 2) << std::endl;
+
+    std::cout << pupa << std::endl;
+    std::cout << dubas << std::endl;
+
+    std::cout << "Average mark of all students is: ";
     std::cout << StudentUtil::CalculateAverageMarkOfAll() << std::endl;
 }

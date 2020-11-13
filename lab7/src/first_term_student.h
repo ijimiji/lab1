@@ -10,10 +10,11 @@ protected:
   std::array<int, 4> ftermMarks;
 public:
   static std::vector<FTermStudent*> GetStudents() { return students; }
-  FTermStudent(const Student&, std::array<int, 4>);
+  FTermStudent(char * _name, int _group, int _course, std::array<int, 4> ftermMarks);
+  FTermStudent(char * _name, int _group, int _course, int, int, int, int);
   FTermStudent(const Student&, int, int, int, int);
   FTermStudent(const FTermStudent&);
-  double GetAverageMark();
+  virtual double GetAverageMark();
   void ChangeMarks(std::array<int, 4>);
   std::array<int, 4> GetMarks() const;
   friend std::ostream& operator<<(std::ostream& os, const FTermStudent& student);
