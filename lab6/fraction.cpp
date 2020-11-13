@@ -28,17 +28,19 @@ Fraction::Fraction(int a, int b, bool simplify) {
 
 void Fraction::Print() {
     bool isNegative = false;
+    int _numerator = numerator;
+    int _denominator = denominator;
 
-    if (numerator * denominator < 0) {
-      numerator = std::abs(numerator);
-      denominator = std::abs(denominator);
+    if (_numerator * _denominator < 0) {
+      _numerator = std::abs(_numerator);
+      _denominator = std::abs(_denominator);
       isNegative = true;
     }
     
-    int integer = numerator / denominator;
-    numerator = numerator - integer * denominator;
+    int integer = _numerator / _denominator;
+    _numerator = _numerator - integer * _denominator;
     
-    if (isNegative && numerator != 0){
+    if (isNegative && _numerator != 0){
        std::cout << "-(";
     } else if(isNegative){
       std::cout << "-";
@@ -48,17 +50,17 @@ void Fraction::Print() {
         std::cout << integer;
     }
     
-    if (numerator != 0) {
-        std::cout << ((integer != 0) ? " + " : "") << numerator << "/"
-                  << denominator;
+    if (_numerator != 0) {
+        std::cout << ((integer != 0) ? " + " : "") << _numerator << "/"
+                  << _denominator;
     }
 
-    if (numerator == 0 && integer == 0) {
+    if (_numerator == 0 && integer == 0) {
         std::cout << 0;
     }
 
     
-    if (isNegative && numerator != 0){
+    if (isNegative && _numerator != 0){
         std::cout << ")";
     }
 
