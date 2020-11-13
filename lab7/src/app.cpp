@@ -53,7 +53,7 @@ void App::Main() {
     FTermStudent lupa("Lupa", 3, 1, {10, 5, 8, 9});
     Student pupa("Pupa", 4, 1);
 
-    // FTermStudent zhmyx("Zhmyx", 4, 1, {10, 9, 9, 8});
+    FTermStudent zhmyx("Zhmyx", 4, 1, {10, 9, 9, 8});
     STermStudent buba("Buba", 4, 1, {7, 9, 6, 4}, {9, 9, 8, 8, 8});
     STermStudent oleg("Oleg", 4, 1, {10, 9, 6, 5}, {10, 7, 8, 8, 10});
     STermStudent kuka("Kuka", 4, 1, {6, 9, 6, 4}, {9, 7, 8, 8, 9});
