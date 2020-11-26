@@ -1,0 +1,7 @@
+// Foo	| found on line 1	| occurences: 5
+// Bar	| found on line 11	| occurences: 1
+// Bar	| found on line 16	| occurences: 2
+// Bar	| found on line 19	| occurences: 1
+// Foo	| found on line 20	| occurences: 1
+// Bar	| found on line 22	| occurences: 1
+//Bar	| found on line 23	| occurences: 1
