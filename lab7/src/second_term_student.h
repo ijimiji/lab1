@@ -20,6 +20,8 @@ public:
   std::array<int, 5> GetMarks() const;
   std::array<int, 4> GetFTermMarks() const;
   friend std::ostream& operator<<(std::ostream& os, const STermStudent& student);
+  ~STermStudent();
+  std::string to_string() const;
   friend class StudentUtil;
 };
 

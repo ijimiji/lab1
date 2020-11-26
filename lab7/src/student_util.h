@@ -5,6 +5,7 @@
 
 #ifndef STUDENT_UTIL_H
 #define STUDENT_UTIL_H
+bool StudentIsPresent(Student*, std::vector<Student *>&);
 class StudentUtil {
 public:
     static std::vector<Student *> GetStudents();

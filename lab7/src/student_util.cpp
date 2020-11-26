@@ -1,18 +1,34 @@
 #include "student_util.h"
 
+bool StudentIsPresent(Student* ref, std::vector<Student*>& students) {
+    bool is_present = false;
+    for (auto student : students) {
+        if (student == ref) {
+            is_present = true;
+            break;
+        }
+    }
+    return is_present;
+}
+
 std::vector<Student*> StudentUtil::GetStudents() {
     std::vector<Student*> students;
-
     for (auto student : Student::students) {
-        students.push_back(student);
+        if (!StudentIsPresent(student, students)) {
+            students.push_back(student);
+        }
     }
 
     for (auto student : FTermStudent::students) {
-        students.push_back(student);
+        if (!StudentIsPresent(student, students)) {
+            students.push_back(student);
+        }
     }
 
     for (auto student : STermStudent::students) {
-        students.push_back(student);
+        if (!StudentIsPresent(student, students)) {
+            students.push_back(student);
+        }
     }
 
     return students;
@@ -67,7 +83,7 @@ double StudentUtil::CalculateAverageMarkOfAll() {
         }
     }
 
-    if (amountOfStudents){
+    if (amountOfStudents) {
         return sum / amountOfStudents;
     }
 

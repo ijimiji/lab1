@@ -40,20 +40,39 @@ std::array<int, 5> STermStudent::GetMarks() const {
 std::array<int, 4> STermStudent::GetFTermMarks() const {
     return ftermMarks;
 }
+ std::string STermStudent::to_string() const{
+    std::string out;
+    out += name;
+    out += " is a ";
+    out += std::to_string(course); 
+    out += " course student from the group number ";
+    out += std::to_string(group);
+    out += "\n";
+    out += "His/her first term marks are: ";
+    for (auto mark : GetFTermMarks()) {
+        out += std::to_string(mark);
+        out += " ";
+    }
+    out += "\n";
+    out += "His/her second term marks are: ";
+    for (auto mark : GetMarks()) {
+        out += std::to_string(mark);
+        out += " ";
+    }
+    return out;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const STermStudent& student) {
-    printf("%s is a %d course student from the group number %d\n",
-        student.name, student.course, student.group);
-    printf("His/her first term marks marks are: ");
-
-    for (auto mark : student.GetFTermMarks()) {
-        printf("%d ", mark);
-    }
-    printf("\n");
-
-    printf("His/her second term marks marks are: ");
-    for (auto mark : student.GetMarks()) {
-        printf("%d ", mark);
-    }
+    std::cout << student.to_string();
     return os;
+}
+
+STermStudent::~STermStudent(){
+  int n = students.size();
+  for (int i = 0; i<n; ++i){
+    if (this == students[i]){
+      students.erase(students.begin() + i);
+    }
+  }
 }

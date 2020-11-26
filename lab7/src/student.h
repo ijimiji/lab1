@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <string>
 
 #ifndef STUDENT_H
 #define STUDENT_H
@@ -15,6 +16,7 @@ private:
   const int personal_id;
   Student();
 public:
+  ~Student();
   char* name;
   int course;
   int group;
@@ -32,6 +34,7 @@ public:
   virtual double GetAverageMark(){ return 0;}
   friend std::ostream& operator<<(std::ostream& os, const Student& student);
   friend class StudentUtil;
+  std::string to_string() const;
 };
 
 #endif

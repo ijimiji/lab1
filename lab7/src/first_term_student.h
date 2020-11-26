@@ -17,6 +17,8 @@ public:
   virtual double GetAverageMark();
   void ChangeMarks(std::array<int, 4>);
   std::array<int, 4> GetMarks() const;
+  ~FTermStudent();
+  std::string to_string() const;
   friend std::ostream& operator<<(std::ostream& os, const FTermStudent& student);
   friend class StudentUtil;
 };

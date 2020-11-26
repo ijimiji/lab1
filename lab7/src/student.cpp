@@ -41,8 +41,26 @@ void Student::SetName(char* _name) { name = _name; }
 void Student::SetCourse(int _course) { course = _course; }
 void Student::SetGroup(int _group) { group = _group; }
 
+std::string Student::to_string() const{
+    std::string out;
+    out += name;
+    out += " is a ";
+    out += std::to_string(course); 
+    out += " course student from the group number ";
+    out += std::to_string(group);
+    return out;
+}
+
 std::ostream& operator<<(std::ostream& os, const Student& student) {
-  printf("%s is a %d course student from the group number %d",
-    student.name, student.course, student.group);
+  std::cout << student.to_string();
   return os;
+}
+
+Student::~Student(){
+  int n = students.size();
+  for (int i = 0; i<n; ++i){
+    if (this == students[i]){
+      students.erase(students.begin() + i);
+    }
+  }
 }
