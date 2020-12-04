@@ -1,18 +1,21 @@
 #ifndef CALC_H
-#define CALC_H 
+#define CALC_H
 
+#include "stack_array.h"
 #include <string>
 #include <vector>
-#include "stack_array.h"
 #include <map>
-#include <string.h>
+#include <cstring>
+#include <exception>
 
-class Calculator{
-public:
-    Calculator(){};
-    static void Run();
-    static double CalcExpression(std::vector<std::string> expr);
-    static std::vector<std::string> ConvertToPRN(std::string expr);
-    static bool ExpressionIsValid(std::string);
+bool isDouble(std::string &str);
+
+class Calculator {
+ public:
+  static void Run();
+  static double CalcExpression(std::vector<std::string> expr);
+  static std::vector<std::string> ConvertToPRN(std::vector<std::string> &expr);
+  static bool ExpressionIsValid(const std::vector<std::string> &expr);
+  static std::vector<std::string> ParseExpression(std::string);
 };
 #endif
