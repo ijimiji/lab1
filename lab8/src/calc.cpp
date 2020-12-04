@@ -84,7 +84,7 @@ char unshow(std::string str) {
 }
 
 int operatorPriority(std::string &op) {
-  if (op == ")") {
+  if (op == "(") {
     return 1000;
   }
   if (op == "-") {
@@ -113,16 +113,15 @@ bool isLowerPriority(std::string ref, std::string comp) {
   }
 }
 
+bool isNumberPart(char ch, char prev) {
+  if (isdigit(ch) || isdigit(prev) && ch == '.' || prev == '(' && ch == '-') {
+    return true;
+  }
+  return false;
+}
+
 std::vector<std::string> Calculator::ParseExpression(std::string expr) {
   std::vector<std::string> dest;
-
-  auto isNumberPart = [](char ch, char prev) {
-    if (isdigit(ch) || isdigit(prev) && ch == '.' || prev == '(' && ch == '-') {
-      return true;
-    }
-    return false;
-  };
-
   std::string temp;
 
   for (auto current = expr.begin(); current != expr.end(); ++current) {
@@ -151,8 +150,7 @@ std::vector<std::string> Calculator::ParseExpression(std::string expr) {
     if (*current == ' ') {
       continue;
     }
-
-    throw ParseError();
+    dest.push_back(show(*current));
   }
 
   return dest;
@@ -175,7 +173,6 @@ std::vector<std::string> Calculator::ConvertToPRN(std::vector<std::string> &expr
       while (ops.top_elem() != "(") {
         dest.push_back(ops.pop());
       }
-      // Remove '('
       ops.pop();
       continue;
     }
@@ -197,17 +194,15 @@ std::vector<std::string> Calculator::ConvertToPRN(std::vector<std::string> &expr
   return dest;
 }
 
-bool Calculator::ExpressionIsValid(const std::vector<std::string> &expr) {
+bool Calculator::ExpressionIsValid(std::vector<std::string> raw) {
   stack<std::string> parens;
   stack<std::string> ops;
-
   try {
-    for (auto current = expr.begin(); current != expr.end(); ++current) {
+    for (auto current = raw.begin(); current != raw.end(); ++current) {
       if (*current == "(") {
         parens.push(*current);
         continue;
       }
-
       if (*current == ")") {
         try {
           parens.pop();
@@ -220,9 +215,14 @@ bool Calculator::ExpressionIsValid(const std::vector<std::string> &expr) {
       if (isOperator(*current)) {
         read(current[-1]);
         read(current[1]);
+        continue;
       }
+      if (isDouble(*current)){
+        continue;
+      }
+      throw ParseError();
     }
-  } catch (ParseError &e) {
+  } catch (...) {
     return false;
   }
   return true;
@@ -239,12 +239,15 @@ void Calculator::Run() {
       running = false;
     } else if (input.empty()) {
     } else {
-      auto expr = Calculator::ParseExpression(input);
-      if (Calculator::ExpressionIsValid(expr)) {
+      auto expr = ParseExpression(input);
+
+      if (Calculator::ExpressionIsValid(expr)){
         expr = Calculator::ConvertToPRN(expr);
+        auto res = Calculator::CalcExpression(expr);
+        std::cout << res << std::endl;
+      } else {
+        std::cout << "Expression is invalid" << std::endl;
       }
-      auto res = Calculator::CalcExpression(expr);
-      std::cout << res << std::endl;
     }
   }
 }

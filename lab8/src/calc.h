@@ -15,7 +15,7 @@ class Calculator {
   static void Run();
   static double CalcExpression(std::vector<std::string> expr);
   static std::vector<std::string> ConvertToPRN(std::vector<std::string> &expr);
-  static bool ExpressionIsValid(const std::vector<std::string> &expr);
+  static bool ExpressionIsValid(std::vector<std::string> input);
   static std::vector<std::string> ParseExpression(std::string);
 };
 #endif
