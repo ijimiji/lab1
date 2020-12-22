@@ -4,11 +4,10 @@
 #include "stack_array.h"
 #include <string>
 #include <vector>
-#include <map>
-#include <cstring>
 #include <exception>
+#include <regex>
 
-bool isDouble(std::string &str);
+bool is_double(std::string &str);
 
 class Calculator {
  public:

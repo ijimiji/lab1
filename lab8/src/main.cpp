@@ -1,6 +1,7 @@
 #include "calc.h"
 
+
 int main() {
-  Calculator::Run();
-  return 0;
+    Calculator::Run();
+    return 0;
 }
