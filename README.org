@@ -1,7 +1,8 @@
 * BSU Programming course problems
 This repository includes basic problems of the Programming course.
 Tasks are mostly made for the 10-th variant.
-** Topics
+** First semester
+*** Topics
 - Computations with given accuracy
 - Arrays
 - Matrix
