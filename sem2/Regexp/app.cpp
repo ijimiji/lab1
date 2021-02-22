@@ -43,11 +43,13 @@ vector<vector<string>> parseLines(vector<string> lines){
 
 shared_ptr<Student> createStudent(vector<string> fields){
     auto student = std::make_shared<Student>();
-    student->surname = fields[0];
-    student->f_name = fields[1];
+    student->f_name = fields[0];
+    student->surname = fields[1];
     student->s_name = fields[2];
-    student->year = std::stoi(fields[3]);
-    student->id = std::stoll(fields[4]);
+    if (fields.size() == 5){
+        student->year = std::stoi(fields[3]);
+        student->id = std::stoll(fields[4]);
+    }
     return student;
 }
 
@@ -88,22 +90,25 @@ void App::Main() {
     std::ostream_iterator<shared_ptr<Student>> out_it (std::cout, "\n");
     std::copy(students.begin(), students.end(), out_it);
 
-    auto hash = [](const string &s){ 
-        return std::hash<std::string>()(s); 
+    auto hash = [](const  shared_ptr<Student> &s){ 
+        return std::hash<std::string>()(s->getFullName()); 
     };
 
-    std::unordered_set<string, decltype(hash)> set(0, hash);
+    std::unordered_set<shared_ptr<Student>, decltype(hash)> set(0, hash);
 
     for (auto student : students) {
-        set.insert(student->getFullName());
+        set.insert(student);
     }
 
     string arg;
     cout << "Enter student's name" << endl;
     while (arg != "exit"){
+        std::cin.ignore ();
         std::getline(cin, arg, '\n');
-        if (set.find(arg) != set.end()){
-            cout << hash(arg) << std::endl;
+        auto candidate = createStudent(parseLine(arg));
+        auto match = set.find(candidate);
+        if (match != set.end()){
+            cout <<  (*match)->id << std::endl;
         } else if (arg != "") {
             cout << "Go away!\n";
         }
