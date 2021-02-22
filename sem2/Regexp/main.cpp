@@ -1,7 +1,7 @@
 #include <clocale>
 #include "app.h"
 
-int main(){
+int main() {
     std::locale::global(std::locale(""));
     App::Main();
     return 0;

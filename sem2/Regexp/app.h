@@ -20,7 +20,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-class App{
+class App {
 public:
     static void Main();
 };

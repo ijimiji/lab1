@@ -6,7 +6,6 @@ lines = f.readlines()
 f.close()
 new_lines = []
 for line in lines:
-    # print(line)
     new_lines.append(re.sub(regex, subst, line, 0, re.MULTILINE))
 f = open("L1_NEW_UTF8.txt", "w")
 f.writelines(new_lines)
