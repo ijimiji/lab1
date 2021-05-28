@@ -1,11 +1,8 @@
-default: all
-c:
-	clang++ -fasm-blocks main.cpp module.o -o main
+all: run
 
 asm:
-	nasm -f macho64 module.asm
-
-run:
+	nasm -f elf64  magic.asm
+c: asm
+	gcc -no-pie  main.c magic.o -o main
+run: c
 	./main
-
-all: asm c run
